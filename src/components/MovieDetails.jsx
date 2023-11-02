@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Alert, Card, Col, Container, Row, Spinner } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
+import CommentArea from './CommentArea'
 
 const url = 'http://www.omdbapi.com/?apikey=81846f9a&i='
 
@@ -22,9 +23,11 @@ const MovieDetails = () => {
         }
       })
       .then((data) => {
-        console.log(data)
-        setMovie(data)
-        setIsLoading(false)
+        setTimeout(() => {
+          console.log(data)
+          setMovie(data)
+          setIsLoading(false)
+        }, 650)
       })
       .catch((err) => {
         console.log('ERRORE', err)
@@ -49,7 +52,7 @@ const MovieDetails = () => {
           </div>
         )}
         <Row className="justify-content-center">
-          <Col className="col-md-4  px-0">
+          <Col className="col-md-4 px-0">
             <Card className="h-100 border-0 bg-primary">
               <Card.Img
                 variant="top"
@@ -78,6 +81,7 @@ const MovieDetails = () => {
               </div>
             </Card>
           </Col>
+          <CommentArea movieId={movie.imdbID} />
         </Row>
       </Container>
     </>
