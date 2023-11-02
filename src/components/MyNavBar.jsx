@@ -3,9 +3,10 @@ import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import ListGroup from 'react-bootstrap/ListGroup'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 function MyNavBar() {
+  const location = useLocation()
   return (
     <>
       <Navbar
@@ -13,7 +14,7 @@ function MyNavBar() {
         className="navbar navbar-expand-lg text-light bg-primary flex-column"
       >
         <Container fluid className="ps-md-5">
-          <Link to="/" className="nav-link">
+          <Link to="/home" className="nav-link">
             <img
               src="/assets/netflix_logo.png"
               alt="netflixlogo"
@@ -25,29 +26,64 @@ function MyNavBar() {
             <Nav className="me-auto">
               <ListGroup as="ul" className="flex-row">
                 <ListGroup.Item as="li" className="p-0 bg-primary border-0">
-                  <Nav.Link href="#" className="text-light">
+                  <Link
+                    to="/home"
+                    className={`nav-link ${
+                      location.pathname === '/home'
+                        ? 'active fw-bold text-secondary'
+                        : 'text-light'
+                    }`}
+                  >
                     Home
-                  </Nav.Link>
+                  </Link>
                 </ListGroup.Item>
                 <ListGroup.Item as="li" className="p-0 bg-primary border-0">
-                  <Link to="/tvshows" className="text-light nav-link">
+                  <Link
+                    to="/tvshows"
+                    className={`nav-link ${
+                      location.pathname === '/tvshows'
+                        ? 'active fw-bold text-secondary'
+                        : 'text-light'
+                    }`}
+                  >
                     Tv Shows
                   </Link>
                 </ListGroup.Item>
                 <ListGroup.Item as="li" className="p-0 bg-primary border-0">
-                  <Nav.Link href="#" className="text-light">
+                  <Link
+                    to="/movies"
+                    className={`nav-link ${
+                      location.pathname === '/movies'
+                        ? 'active fw-bold text-secondary'
+                        : 'text-light'
+                    }`}
+                  >
                     Movies
-                  </Nav.Link>
+                  </Link>
                 </ListGroup.Item>
                 <ListGroup.Item as="li" className="p-0 bg-primary border-0">
-                  <Nav.Link href="#" className="text-light">
+                  <Link
+                    to="/recentlyadded"
+                    className={`nav-link ${
+                      location.pathname === '/recentlyadded'
+                        ? 'active fw-bold text-secondary'
+                        : 'text-light'
+                    }`}
+                  >
                     Recently Added
-                  </Nav.Link>
+                  </Link>
                 </ListGroup.Item>
                 <ListGroup.Item as="li" className="p-0 bg-primary border-0">
-                  <Nav.Link href="#" className="text-light">
+                  <Link
+                    to="/mylist"
+                    className={`nav-link ${
+                      location.pathname === '/mylist'
+                        ? 'active fw-bold text-secondary'
+                        : 'text-light'
+                    }`}
+                  >
                     My List
-                  </Nav.Link>
+                  </Link>
                 </ListGroup.Item>
               </ListGroup>
             </Nav>

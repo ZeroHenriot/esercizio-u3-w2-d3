@@ -6,6 +6,8 @@ import MyNavBar from './components/MyNavBar'
 import ProfilePage from './components/ProfilePage'
 import SettingPage from './components/SettingsPage'
 import MovieDetails from './components/MovieDetails'
+import NotFound from './components/NotFound'
+import Home from './components/Home'
 
 // ATTENZIONE, IO USO FIREFOX PER CUI SE ALCUNE COSA SU CHROME SONO DIVERSE NON SO
 
@@ -22,10 +24,12 @@ function App() {
         </header>
         <main className="flex-grow-1">
           <Routes>
+            <Route path="/home" element={<Home />}></Route>
             <Route path="/tvshows" element={<Movies />} />
             <Route path="/settings" element={<SettingPage />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/moviedetail/:movieId" element={<MovieDetails />} />
+            <Route element={<NotFound />} path="*" />
           </Routes>
         </main>
         <footer>

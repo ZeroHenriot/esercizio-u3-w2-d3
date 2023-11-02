@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Alert, Spinner } from 'react-bootstrap'
+import { Alert, Col, Spinner } from 'react-bootstrap'
 import CommentList from './CommentList'
 import AddComment from './AddComment'
 
@@ -26,8 +26,10 @@ const CommentArea = (props) => {
         }
       })
       .then((data) => {
-        setComment(data)
-        setIsLoading(false)
+        setTimeout(() => {
+          setComment(data)
+          setIsLoading(false)
+        }, 650)
       })
       .catch((err) => {
         setIsLoading(false)
@@ -46,10 +48,15 @@ const CommentArea = (props) => {
   return (
     <>
       {props.movieId && (
-        <div className="sticky-top mt-2 p-0" id="commentArea">
+        <Col xs={10} className="mt-2 p-0" id="commentArea">
           {isLoading && (
             <div className="text-center">
-              <Spinner animation="grow" variant="secondary"></Spinner>
+              <Spinner
+                animation="grow"
+                variant="secondary"
+                style={{ height: '50px', width: '50px' }}
+                className="my-5"
+              ></Spinner>
             </div>
           )}
           {isError && (
@@ -59,9 +66,17 @@ const CommentArea = (props) => {
               </Alert>
             </div>
           )}
-          <CommentList refresh={getComments} comments={comment}></CommentList>
-          <AddComment movieId={props.movieId}></AddComment>
-        </div>
+
+          {!isLoading && !isError && comment && (
+            <>
+              <CommentList
+                refresh={getComments}
+                comments={comment}
+              ></CommentList>
+              <AddComment movieId={props.movieId}></AddComment>
+            </>
+          )}
+        </Col>
       )}
     </>
   )
